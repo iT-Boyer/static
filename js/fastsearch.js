@@ -134,7 +134,10 @@ function loadSearch() {
         'permalink',
         'title',
         'tags',
-        'contents'
+        'contents',
+        'date',
+        'categories',
+        'section',
         ]
     };
     // Create the Fuse index
@@ -159,7 +162,7 @@ function executeSearch(term) {
   } else { // build our html
     // console.log(results)
     permalinks = [];
-    numLimit = 5;
+    numLimit = 15;
     for (let item in results) { // only show first 5 results
         if (item > numLimit) {
             break;
@@ -167,8 +170,8 @@ function executeSearch(term) {
         if (permalinks.includes(results[item].item.permalink)) {
             continue;
         }
-//    console.log('item: %d, title: %s', item, results[item].item.title)
-      searchitems = searchitems + '<li><a href="' + results[item].item.permalink + '" tabindex="0">' + '<span class="title">' + results[item].item.title + '</span></a></li>';
+//    console.log('item: %d, title: %s', item, results[item].item.contents)
+      searchitems = searchitems + '<li><a href="' + results[item].item.permalink + '" tabindex="0">' + '<span class="title">' + results[item].item.title + '</span><br /> <span class="sc">'+ results[item].item.categories +'</span><br /> — ' + results[item].item.tags + '<br /> — <em>' + results[item].item.date + '</em></a></li>';
       permalinks.push(results[item].item.permalink);
     }
     resultsAvailable = true;
